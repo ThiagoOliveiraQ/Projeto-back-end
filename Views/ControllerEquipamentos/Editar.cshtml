@@ -1,0 +1,34 @@
+﻿@model EquipamentoModel
+@{
+    ViewData["Title"] = "Editar equipamento";
+}
+
+<div class="text-center">
+
+    <h1 class="display-4">Editar equipamento</h1>
+    <br />
+</div>
+
+<form asp-controller="ControllerEquipamentos" asp-action="Alterar" method="post">
+
+    <input type="hidden" asp-for="Id" />
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Nome do equipamento</span>
+        <input type="text" asp-for="Nome" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Tempo de uso diário (Horas)</span>
+        <input type="number" asp-for="Tempo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Gastos (Khw)</span>
+        <input type="number" asp-for="Khw" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Quantidade</span>
+        <input type="number" asp-for="Quantidade" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <a class="btn btn-secondary" asp-controller="ControllerEquipamentos" asp-action="Index">Voltar</a>
+</form>
+

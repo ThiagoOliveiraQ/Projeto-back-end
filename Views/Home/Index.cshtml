@@ -1,0 +1,65 @@
+﻿@model EquipamentoEletronico
+@{
+    ViewData["Title"] = "Calculadora de Equipamentos";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Consumo de Eletroeletrônicos</title>
+</head>
+<body>
+    <h1>Calculadora de Consumo de Eletrônicos</h1>
+    <form asp-controller="Equipamento" asp-action="RegistrarResultado" method="post">
+        <div class="form-group">
+            <label for="nome">Nome do Equipamento:</label>
+            <input asp-for="Nome" class="form-control" placeholder="Digite o nome do Equipamento" type="text">
+        </div>
+        <div class="form-group">
+            <label for="potencia">Potência do Equipamento (em watts):.</label>
+            <input asp-for="Potencia" class="form-control" placeholder="Digite a potência do Equipamento" type="number">
+        </div>
+        <div class="form-group">
+            <label for="tempo">Tempo de Uso (em horas):</label>
+            <input asp-for="TempoDeUso" class="form-control" placeholder="Digite o Tempo de Uso do Equipamento" type="number">
+        </div>
+        <div class="form-group">
+            <input asp-for="Consumo" class="form-control" type="hidden">
+        </div>
+
+        <p id="resultado"></p>
+        <button onclick="calcularConsumo()" type="submit">Calcular Consumo</button>
+    </form>
+
+    <script>
+        function calcularConsumo() {
+            var nome = document.getElementsByName("Nome")[0].value;
+            var potencia = parseFloat(document.getElementsByName("Potencia")[0].value);
+            var tempo = parseFloat(document.getElementsByName("TempoDeUso")[0].value);
+
+            var consumo = (potencia * tempo) / 1000;
+
+            document.getElementById("resultado").innerHTML = "O consumo do equipamento " + nome + " em " + tempo + " horas é de " + consumo.toFixed(2) + " kWh.";
+            document.getElementsByName("Consumo")[0].value = consumo.toFixed(2);
+
+            fetch('/EquipamentoEletronico', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Nome: nome,
+                    Potencia: potencia,
+                    TempoDeUso: tempo,
+                    Consumo: consumo.toFixed(2)
+
+                   
+                })
+            })
+           
+        }
+        
+    </script>
+</body>
+</html>

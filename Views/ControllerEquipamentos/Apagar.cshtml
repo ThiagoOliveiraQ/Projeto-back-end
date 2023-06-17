@@ -1,0 +1,11 @@
+﻿@model EquipamentoModel
+@{
+    ViewData["Title"] = "Confirmar apagar equipamento";
+}
+
+<div class="text-center">
+    <h3>Deseja apagar este equipamento?(@Model.Nome)</h3>
+</div>
+
+<a class="btn btn-primary btn-block" role="button" asp-controller="ControllerEquipamentos" asp-action="Index">Cancelar</a>
+<a class="btn btn-danger btn-block" role="button" asp-controller="ControllerEquipamentos" asp-action="ApagarReal" asp-route-id="@Model.Id">Confirmar</a>

@@ -1,0 +1,47 @@
+﻿@model List<EquipamentoModel>
+@{
+    ViewData["Title"] = "Listagem de equipamentos";
+}
+
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-asp-controller="Adicionar" asp-action="Criar">Adicionar novo equipamento</a>
+    </div>
+    <br />
+
+    <h1 class="display-4">Listagem de equipamentos</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Nome do Equipamento</th>
+                <th scope="col">KHW</th>
+                <th scope="col">Tempo de uso</th>
+                <th scope="col"></th>
+
+           </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var equipamento in Model)
+                {
+                    <tr>
+                      <th scope="row">@equipamento.Quantidade</th>
+                <td>@equipamento.Nome</td>
+                <td>@equipamento.Khw</td>
+                <td>@equipamento.Tempo</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a role="button" class="btn btn-primary" asp-route-id="@equipamento.Id" asp-asp-controller="ControllerEquipamentos" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@equipamento.Id" asp-asp-controller="ControllerEquipamentos" asp-action="Apagar">Apagar</a>
+                    </div>
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
